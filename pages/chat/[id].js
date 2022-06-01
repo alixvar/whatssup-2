@@ -33,7 +33,7 @@ export async function getServerSideProps(context) {
 
   const messages = messagesRes.docs
     .map((doc) => ({
-      id: id.doc,
+      id: doc.id,
       ...doc.data(),
     }))
     .map((messages) => ({

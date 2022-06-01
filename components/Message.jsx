@@ -1,7 +1,7 @@
 import React from "react";
 
-function Message({ user, Message }) {
-  return <div>{Message}</div>;
+function Message({ user, message }) {
+  return <div>{message.message}</div>;
 }
 
 export default Message;
