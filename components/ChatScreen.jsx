@@ -9,12 +9,19 @@ import { useRouter } from "next/router";
 import { useCollection } from "react-firebase-hooks/firestore";
 import Message from "./Message";
 import { InsertEmoticon, Mic } from "@mui/icons-material";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import firebase from "firebase";
 import getRecipientEmail from "../utils/getRecipientEmail";
 import TimeAgo from "timeago-react";
 
 function ChatScreen({ messages, chat }) {
+  const scrollToButtom = useRef(null);
+  const scrollToButtomF = () => {
+    scrollToButtom.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
   const [user] = useAuthState(auth);
   const [input, setInput] = useState("");
   const router = useRouter();
@@ -68,6 +75,7 @@ function ChatScreen({ messages, chat }) {
       photoURL: user.photoURL,
     });
     setInput("");
+    scrollToButtomF();
   };
 
   const recipient = recipientSnapshot?.docs?.[0]?.data();
@@ -101,7 +109,7 @@ function ChatScreen({ messages, chat }) {
       </Header>
       <MessageContainer>
         {showMessages()}
-        <EndOfMessage />
+        <EndOfMessage ref={scrollToButtom} />
       </MessageContainer>
 
       <InputContainer>
@@ -140,6 +148,7 @@ const Header = styled.div`
   border-bottom: 1px solid whitesmoke;
   height: 80px;
   background-color: white;
+  z-index: 100;
 `;
 
 const HeaderInformation = styled.div`
@@ -161,7 +170,9 @@ const MessageContainer = styled.div`
   min-height: 90vh;
 `;
 
-const EndOfMessage = styled.div``;
+const EndOfMessage = styled.div`
+  margin-bottom: 50px;
+`;
 
 const InputContainer = styled.form`
   display: flex;
