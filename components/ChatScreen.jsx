@@ -1,6 +1,6 @@
 import { Avatar } from "@mui/material";
 import styled from "styled-components";
-import MoreVert from "@mui/icons-material/morevert";
+// import  from "@mui/icons-material/morevert";
 import AttachFile from "@mui/icons-material/AttachFile";
 import { IconButton } from "@mui/material";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -8,7 +8,7 @@ import { auth, db } from "../firebase";
 import { useRouter } from "next/router";
 import { useCollection } from "react-firebase-hooks/firestore";
 import Message from "./Message";
-import { InsertEmoticon, Mic } from "@mui/icons-material";
+import { InsertEmoticon, Mic, MoreVert } from "@mui/icons-material";
 import { useRef, useState } from "react";
 import firebase from "firebase";
 import getRecipientEmail from "../utils/getRecipientEmail";
