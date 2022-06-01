@@ -77,7 +77,15 @@ function Sidebar() {
 }
 export default Sidebar;
 
-const Container = styled.div``;
+const Container = styled.div`
+  flex: 0.4;
+  min-width: 300px;
+  max-width: 350px;
+  overflow-y: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
 const Header = styled.div`
   display: flex;

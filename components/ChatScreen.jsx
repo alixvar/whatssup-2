@@ -8,10 +8,11 @@ import { auth, db } from "../firebase";
 import { useRouter } from "next/router";
 import { useCollection } from "react-firebase-hooks/firestore";
 import Message from "./Message";
-import { InsertEmoticon } from "@mui/icons-material";
+import { InsertEmoticon, Mic } from "@mui/icons-material";
 
 function ChatScreen() {
   const [user] = useAuthState(auth);
+  const [input, setInput] = useState("");
   const router = useRouter();
   const [messagesSnapshot] = useCollection(
     db
@@ -62,7 +63,10 @@ function ChatScreen() {
         <IconButton>
           <InsertEmoticon />
         </IconButton>
-        <Input />
+        <Input placeholder="message..." />
+        <IconButton>
+          <Mic />
+        </IconButton>
       </InputContainer>
     </Container>
   );
@@ -75,10 +79,12 @@ const Container = styled.div``;
 const Header = styled.div`
   display: flex;
   align-items: center;
+  position: sticky;
   padding: 10px;
   top: 0;
   border-bottom: 1px solid whitesmoke;
   height: 80px;
+  background-color: white;
 `;
 
 const HeaderInformation = styled.div`
@@ -94,7 +100,11 @@ const HeaderInformation = styled.div`
 
 const HeaderIcons = styled.div``;
 
-const MessageContainer = styled.div``;
+const MessageContainer = styled.div`
+  padding: 30px;
+  background-color: #e5ded8;
+  min-height: 90vh;
+`;
 
 const EndOfMessage = styled.div``;
 
@@ -106,6 +116,17 @@ const InputContainer = styled.form`
   bottom: 0;
   background-color: white;
   z-index: 100;
+  gap: 10px;
 `;
 
-const Input = styled.input``;
+const Input = styled.input`
+  flex: 1;
+  align-items: center;
+  padding: 15px;
+  position: sticky;
+  bottom: 0;
+  background-color: whitesmoke;
+  outline: none;
+  border: 1px solid whitesmoke;
+  border-radius: 10px;
+`;
