@@ -36,12 +36,11 @@ function Sidebar() {
     }
   };
 
-  const chatAlreadyExists = (recipientEmail) => {
+  const chatAlreadyExists = (recipientEmail) =>
     !!chatsSnapshot?.docs.find(
       (chat) =>
         chat.data().users.find((user) => user === recipientEmail)?.length > 0
     );
-  };
 
   chatAlreadyExists();
 
@@ -65,12 +64,7 @@ function Sidebar() {
       <SidebarButton onClick={createChat}>Start a New Chat</SidebarButton>
       {/* ---------> list of chats <-------- */}
       {chatsSnapshot?.docs.map((chat) => (
-        <Chat
-          key={chat.id}
-          id={chat.id}
-          users={chat.data().users}
-          user={user}
-        />
+        <Chat key={chat.id} id={chat.id} users={chat.data().users} />
       ))}
     </Container>
   );

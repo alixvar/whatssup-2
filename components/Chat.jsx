@@ -2,11 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { Avatar } from "@mui/material";
 import getRecipientEmail from "../utils/getRecipientEmail";
-import { db } from "../firebase";
+import { auth, db } from "../firebase";
 import { useCollection } from "react-firebase-hooks/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/router";
 
-function Chat({ id, users, user }) {
+function Chat({ id, users }) {
+  const [user] = useAuthState(auth);
   const recipientEmail = getRecipientEmail(users, user);
   const [recipientSnapShot] = useCollection(
     db.collection("users").where("email", "==", getRecipientEmail(users, user))
