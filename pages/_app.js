@@ -5,6 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Login from "./login";
 import Loading from "../components/Loading";
 import firebase from "firebase";
+import { Analytics } from "@vercel/analytics/react";
 
 function MyApp({ Component, pageProps }) {
   const [user, loading] = useAuthState(auth);
@@ -24,7 +25,12 @@ function MyApp({ Component, pageProps }) {
   if (loading) return <Loading />;
   if (!user) return <Login />;
 
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Component {...pageProps} />
+      <Analytics />
+    </>
+  );
 }
 
 export default MyApp;
